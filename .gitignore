@@ -6,3 +6,4 @@
 
 # ignore gcc config files.
 .gcc-flags.json
+node_modules
