@@ -1,0 +1,1019 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>椭圆曲线数学</title>
+
+		<link rel="stylesheet" href="/css/reveal.css">
+		<link rel="stylesheet" href="/css/theme/simple.css">
+		<!-- Highlight.js used for syntax highlighting of code -->
+		<link rel="stylesheet" href="/lib/css/default.css">
+		<!-- Simple.css theme override for teachbitcoin -->
+		<link rel="stylesheet" href="/css/teachbitcoin.css">
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/css/print/pdf.css' : '/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+
+				<!-- *********** BEGIN: Chapter Subtopics 1 *********** -->
+				<section class ="box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线数学</span>Subtopics
+					</div>
+
+					<!-- <img src="images/ec_math/chapter_subtopics_arrows.svg" class = "image" style = "z-index: -1;"> -->
+
+					<div class = "multi_text_box_container" style = "padding: 70px 0 0 0;">
+						<div class = "text_box orange_border" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a + b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a - b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; b</span> over \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;c = a&#8901;c + b&#8901;c</span></li>
+								<li><span class="inline_code">a^b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a/b</span> 在 \(\mathbb{F}_{p}\)</li>
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC)在实数域 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">椭圆曲线坐标 P</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线在素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">椭圆曲线坐标 P</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{F}_{p}\) </li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+								<hr style = "height:3px; visibility:hidden;">
+								<li style = "font-weight: 600;">Bitcoin Keys:</li>
+								<li><span class="inline_code">s &#8901; G</span> 在 <span class="inline_code">secp256k1</span></li>
+							</ul>
+						</div>
+					</div>
+
+				</section>
+				<!-- *********** END: Chapter Subtopics 1 *********** -->
+
+				<!-- *********** BEGIN: Finite Fields *********** -->
+				<section class = "box">
+
+					<div class = "title"
+						>介绍 <span class = "title weight">有限域</span>
+					</div>
+
+					<div style = "position: absolute; top: 150px; left: 120px;">
+						<ul style = "list-style-type: none; margin: 0;">
+							<li class = "math_large">\(\mathbb{F}_{p} = \left\{0,1,2,...,p-1\right\}\)</li>
+							<br>
+							<div>
+							<li class = "math_normal">例子:</li>
+							<ul class = "math_normal">
+								<li >\(\mathbb{F}_{7} = \left\{0,1,2,3,4,5,6\right\}\)</li>
+								<li>\(\mathbb{F}_{21} = \left\{0,1,2,3,...,19,20\right\}\)</li>
+								<li>\(\mathbb{F}_{127} = \left\{0,1,2,3,...,125,126\right\}\)</li>
+							</ul>
+						</div>
+						</ul>
+					</div>
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>有限域 \(\mathbb{F}_{p}\)是简单的从 \(0\) 到 \(p-1\)的整数集合.</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: Finite Fields *********** -->
+
+				<!-- *********** BEGIN: Finite Field Addition *********** -->
+				<section class = "box">
+
+					<div class = "title"
+						>有限域<span class = "title weight"> 加法</span>
+					</div>
+
+					<div style = "position: absolute; top: 200px; width: 100%; margin: auto; text-align: center;">
+						<span class = "math_normal">\(5+8=1\:\left(\bmod 12\:\right)\)</span>
+					</div>
+
+					<img src="/images/ec_math/ff_addition.svg" class = "image" style = "z-index: -1;">
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>想象 有限域 \(\mathbb{F}_{12}\)的所有数字绕成一圈, 像一个时钟.</li>
+							<li>对于加法运算, 顺时针移动针n步.</li>
+							<li>这相当于除法求余: (5 + 8)/12 = 13/12 = 1 余 1</li>
+						</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: Finite Field Addition *********** -->
+
+				<!-- *********** BEGIN: Field Subtraction *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						有限域<span class = "title weight">减法</span>
+					</div>
+
+					<div style = "position: absolute; top: 200px; width: 100%; margin: auto; text-align: center;">
+						<span class = "math_normal">\(4 - 19 = 2 \:\left(\bmod 17\:\right)\)</span>
+					</div>
+					<img src="/images/ec_math/ff_subtraction.svg" class = "image" style = "z-index: -1;">
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>对于减法运算, 简单的逆时针方向移动指针n步.</li>
+							<li>在上面的例子中, 我们首先顺时针方向(正)移动4个刻度, 然后逆时针(负)移动19个刻度得到2.</li>
+						</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: Field Subtraction *********** -->
+
+				<!-- *********** BEGIN: Field Multiplication *********** -->
+				<section class="box">
+
+					<div class = "title"
+						>有限域<span class = "title weight">乘法</span>
+						</div>
+
+						<div style = "position: absolute; top: 200px; width: 100%; margin: auto; text-align: center;">
+						<span class = "math_normal">\(4 \cdot 5 = 3 \:\left(\bmod 17\:\right)\)</span>
+						</div>
+						<img src="/images/ec_math/ff_multiplication.svg" class = "image" style = "z-index: -1;">
+
+						<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>\(4 \cdot 5 = +20\), 我们简单的顺时针方向移动20个刻度得到3.
+							</li>
+						</ul>
+						</div>
+
+				</section>
+				<!-- *********** END: Field Multiplication *********** -->
+
+				<!-- *********** BEGIN: Field Distributivity *********** -->
+				<section class = "box">
+					<div class = "title">
+						有限域运算的<span class = "title weight">分配律</span>
+					</div>
+
+					<!-- Derivation Graphic -->
+					<img src="/images/ec_math/ff_distributivity.svg" class = "image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 45%; font-size: 27px;">
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 36%; font-size: 22px; margin: 80px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: bold;">加法/乘法的分配律:</li>
+								<div class="">
+									<ul>
+										<li><span class="inline_code">(a + b)&#8901;c = a&#8901;c + b&#8901;c</span></li>
+										<li>例子(左)说明了这一点.</li>
+										<li>模运算可以在任何时候执行.</li>
+									</ul>
+									<hr style = "height:3px; visibility:hidden;">
+								</div>
+							</ul>
+						</div>
+
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** END: Field Distributivity *********** -->
+
+
+				<!-- *********** BEGIN: Field Exponentiation *********** -->
+				<section class ="box">
+					<div class = "title"
+					>有限域 <span class = "title weight">求幂</span>
+					</div>
+
+					<div style = "position: absolute; top: 200px; width: 100%; margin: auto; text-align: center;">
+						<span class = "math_normal">\(2^{5}=15\:\left(\bmod 17\:\right)\)</span>
+					</div>
+					<img src="/images/ec_math/ff_exponentiation.svg" class = "image" style = "z-index: -1;">
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>\(2^{5}=32\), 所以我们顺时针移动指针32个刻度得到15.
+							</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: Field Exponentiation *********** -->
+
+				<!-- *********** BEGIN: Field Division /w Multiplication Tables *********** -->
+				<section class = "box">
+					<div class = "title"
+					>有限域<span class = "title weight">除法</span>
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 50px 0 0 0;">
+						<div style = "width: 540px; text-align: center; font-size: 35px; font-weight:600;">
+							除法
+						</div>
+						<div style = "width: 540px; text-align: center; font-size: 35px; font-weight:600;">
+							乘法表
+						</div>
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 5px 0 0 0;">
+						<div class = "text_box " style = "width: 500px; text-align: center;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none; text-align:center;">
+								<li>\(2/4=2\:\left(\bmod 6\:\right)\)</li>
+								<li>\(3/5=4\:\left(\bmod 17\:\right)\)</li>
+							</ul>
+						</div>
+						<div class = "text_box orange_border" style = "width: 500px; text-align: center;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none; text-align:center;">
+								<li>\(2=4 \cdot 2\:\left(\bmod 6\:\right)\)</li>
+								<li>\(3=5 \cdot 4\:\left(\bmod 17\:\right)\)</li>
+							</ul>
+						</div>
+					</div>
+
+					<div style ="padding: 30px 0 0 0;text-align:center; font-size: 22px; font-style:italic;">
+						除法在 \(\mathbb{F}_{p}\)上 (理论上) 可以通过被维护
+						<br>
+						在 \(\mathbb{F}_{p}\)所有成对的乘法表所执行.
+					</div>
+
+					<img src="images/ec_math/ff_division_mult_table_arrow.svg" class = "image" style = "z-index: -1;">
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>除法可以简单地定义为乘法的逆运算(乘法表).</li>
+							<li>然而, 对于素数域 \(\mathbb{F}_{p}\), 当 P 是素数, 有一种简单的方法来计算除法 ...</li>
+							<li><span style="opacity:0.5; font-style: italic;">
+							扩展欧几里得算法是模除法的一种标准方法, 但是更复杂.<span></li>
+
+						</li>
+						</ul>
+					</div>
+				</section>
+				<!-- *********** END: Field Division /w Multiplication Tables *********** -->
+
+				<!-- *********** BEGIN: Field Division for Prime Fields *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						除法在 <span class = "title weight">素数域</span>上
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 50px 0 0 0;">
+						<div style = "width: 540px; text-align: center; font-size: 35px; font-weight:600;">
+							费马小定理
+						</div>
+						<div style = "width: 540px; text-align: center; font-size: 35px; font-weight:600;">
+							对于素数域\(\mathbb{F}_{p}\)
+						</div>
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 10px 0 0 0;">
+						<div class = "text_box" style = "width: 500px; text-align: center;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li>当 p 是素数时:</li>
+								<li>\(n^{p-1} = 1\left(\bmod p\:\right)\)</li>
+							</ul>
+						</div>
+						<div class = "text_box orange_border" style = "width: 500px; text-align: center;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li>\(\frac{1}{n} = n^{-1}\left(\bmod p\:\right)\)</li>
+								<li>\(\frac{1}{n}  = n^{-1}\cdot n^{p-1} = n^{p-2} \left(\bmod p\:\right)\)</li>
+							</ul>
+						</div>
+					</div>
+
+					<div style ="padding: 30px 0 0 0;text-align:center; font-size: 22px; font-style:italic;">
+						由于等于1，我们可以应用于除法方程:
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+
+					<img src="/images/ec_math/ff_division_fermat_arrow.svg" class = "image" style = "z-index: -1;">
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>费马小定理适用于所有的素数域\(\mathbb{F}_{p}\), 当 p 是素数时.</li>
+							<li>我们用费马小定理推导素数域的除法.</li>
+							<li>计算素数域除法: \(\frac{1}{n} = n^{p-2} \left(\bmod p\:\right)\)</li>
+						</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: Field Division for Prime Fields *********** -->
+
+
+				<!-- *********** BEGIN: Chapter Subtopics 2 *********** -->
+				<section class ="box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线数学</span>Subtopics
+					</div>
+
+					<!-- <img src="images/ec_math/chapter_subtopics_arrows.svg" class = "image" style = "z-index: -1;"> -->
+
+					<div class = "multi_text_box_container" style = "padding: 70px 0 0 0;">
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a + b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a - b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;c = a&#8901;c + b&#8901;c</span></li>
+								<li><span class="inline_code">a^b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a/b</span> 在 \(\mathbb{F}_{p}\)</li>
+							</ul>
+						</div>
+						<div class = "text_box orange_border" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC) 在实数域\(\mathbb{R}\)</li>
+								<li><span class="inline_code">EC-Point P</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线在素数域\(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">椭圆曲线坐标 P</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{F}_{p}\) </li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+								<hr style = "height:3px; visibility:hidden;">
+								<li style = "font-weight: 600;">Bitcoin Keys:</li>
+								<li><span class="inline_code">s &#8901; G</span> 在 <span class="inline_code">secp256k1</span></li>
+							</ul>
+						</div>
+					</div>
+
+				</section>
+				<!-- *********** END: Chapter Subtopics 2 *********** -->
+
+				<!-- *********** BEGIN: EC over real numbers *********** -->
+				<section class = "box">
+					<div class = "title">
+						<span class = "title weight">椭圆曲线</span> 在实数域
+					</div>
+
+					<!-- Graph -->
+					<img src="/images/ec_math/ec_real.svg" class = "image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 50px 0 0 0;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 45%; font-size: 27px;">
+							<div style ="text-align: center;">
+								曲线: \(y^{2}=x^{3}+7\)
+							</div>
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 45%; font-size: 27px; margin: 60px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线一般形式:</li>
+								<li>\(y^{2}=ax^{3}+bx+c\)</li>
+								<br>
+								<li style = "font-weight: 600;">secp256k1 曲线:</li>
+								<li>\(y^{2}=x^{3}+7\)</li>
+								<br>
+								<li style = "font-weight: 600;">椭圆曲线坐标点:</li>
+								<li><span class="inline_code">坐标点 P(x,y)</span>在椭圆曲线上满足其曲线方程.</li>
+								<br>
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+				</section>
+				<!-- *********** END: EC over real numbers *********** -->
+
+				<!-- *********** BEGIN: EC over reals: Addition *********** -->
+				<section class = "box">
+					<div class = "title">
+						<span class = "title weight">椭圆曲线加法 </span>在实数域
+					</div>
+
+					<!-- Images step 0 - 3 -->
+					<img src="/images/ec_math/ec_addition_step0.svg" class = "image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_addition_step1.svg" class = "fragment fade-in image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_addition_step2.svg" class = "fragment fade-in image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_addition_step3.svg" class = "fragment fade-in image" style = "z-index: -1;">
+
+					<!-- Horizontal Text Box -->
+					<!-- Left Text Div --><!-- Right Text Div -->
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<div class = "multi_text_box_container">
+							<!-- Left text div -->
+							<div style = "width: 55%">
+								<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+									<li>1) P1和P2确定一条直线</li>
+									<li>2) 与椭圆曲线相交C</li>
+									<li>3) 关于X轴的对称点是为P3</li>
+								</ul>
+							</div>
+
+						</div>
+					</div><!-- End of Horizontal Text Box -->
+				</section>
+				<!-- *********** END: EC over reals: Addition *********** -->
+
+				<!-- *********** BEGIN: EC over reals: Computation of Addition *********** -->
+				<section class = "box">
+					<div class = "title">
+						<span class = "title weight">椭圆曲线加法</span> (计算)
+					</div>
+
+					<!-- Container for equation list -->
+					<div style = "position: absolute; top: 120px; left: 120px;">
+						<ul style = "list-style-type: none; margin: 0;">
+							<li class = "math_normal" style = "margin:0; font-weight:600;"
+								>对于椭圆曲线的一般形式:
+							</li>
+							<ul class = "math_normal">
+								<li >\(y^{2}=ax^{3}+bx+c\)</li>
+							</ul>
+							<br>
+							<div class = "">
+							<li class = "math_normal" style = "margin: 0 0 20px 0; font-weight:600;"
+								>计算 \(P_{3} = P_{1} + P_{2}\)
+							</li>
+								<ul class = "math_normal">
+									<li >\(P_{3}(x_{3},y_{3}) = P_{1}(x_{1},y_{1}) + P_{2}(x_{2},y_{2})\)</li>
+									<ul>
+										<li>\(s = \frac{y_{2}-y_{1}}{x_{2}-x_{1}}\) for \(x_{1} \neq x_{2}\)</li>
+										<li>\(x_{3} = s^{2}-x_{1}-x_{2}\)</li>
+										<li>\(y_{3}=s(x_{1}-x_{3})-y_{1}\)</li>
+									</ul>
+								</ul>
+							</div>
+						</ul>
+					</div>
+
+					<!-- Container for bottom horizontal text bar -->
+					<div class = "text_box_horizontal" style = "position: absolute; top: 530px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>所示方程描述了椭圆曲线坐标的加法, 当\(x_{1} \neq x_{2}\).</li>
+
+						</ul>
+					</div>
+				</section>
+				<!-- *********** END: EC over reals: Computation of Addition *********** -->
+
+				<!-- *********** BEGIN: EC over reals: Addition with INF *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						椭圆曲线<span class = "title weight">无穷远点</span>加法
+					</div>
+
+					<!-- Graph -->
+					<img src="/images/ec_math/ec_addition_inf.svg" class = "image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 50px 0 0 0;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 45%; font-size: 28px;">
+							<div style ="text-align: center;">
+							</div>
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 45%; font-size: 23px; margin: 60px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">无穷远点:</li>
+								<li>无穷远点定义为沿y轴方向无限远的点.</li>
+								<br>
+								<li>因此, 我们可以把点P1加到无穷远处, 只要把一条垂直线和P1连接起来.</li>
+								<br>
+								<li>\( P_{1}(x_{1},y_{1}) + (Inf/Inf) = P_{1}(x_{1},y_{1}) \)</li>
+								<li>\( P_{1}(x_{1},y_{1}) + P_{2}(x_{1},-y_{1}) = (Inf/Inf) \)</li>
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** END: EC over reals: Addition with INF *********** -->
+
+				<!-- *********** BEGIN: EC over reals: Scalar x EC Point *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线</span> <span class = "title weight">标量乘法</span>
+					</div>
+
+					<!-- Graph -->
+					<img src="/images/ec_math/ec_multiplication.svg" class = "image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 20px 0 0 0;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 50%; font-size: 28px;">
+							<div style ="text-align: center;">
+								\(P_{3} = P_{1} +  P_{1} = 2 \cdot P_{1}\)
+							</div>
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 50%; font-size: 21px; margin: 0px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">关于椭圆曲线坐标P的标量乘法</li>
+								<ul>
+									<li><span class="inline_code">s &#8901; P</span> 等于 <span class="inline_code">P</span> 加上自己 <span class="inline_code">s</span>次.</li>
+								</ul>
+								<hr style = "height: 1px; visibility: hidden;">
+
+								<li style = "font-weight: 600;">点(x,y) + 点(x,y)</li>
+								<ul>
+									<li>注意线 L&#39;(P1,P2).</li>
+									<li>做 P1 关于椭圆曲线的切线, 使得 P1 = P2.</li>
+									<li>计算 P3 = P1 + P1:</li>
+									<ul style="font-size: 16px">
+										<li>\(P_{3}(x_{3},y_{3}) = 2 \cdot P_{1}(x_{1},y_{1})\)</li>
+										<li>\(s =\frac{(3x_{1}^{2}+a)}{2y_{1}}\)</li>
+										<li>\(x_{3} =s^{2}-2x_{1}\)</li>
+										<li>\(y_{3} =s(x_{1}-x_{3})-y_{1}\)</li>
+									</ul>
+								</ul>
+								<hr style = "height: 1px; visibility: hidden;">
+
+								<li style = "font-weight: 600;">分配律:</li>
+								<ul>
+									<li><span class="inline_code">(a + b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+									<li>与椭圆曲线加法的关联性有关</li>
+								</ul>
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** BEGIN: EC over reals: Scalar x EC Point *********** -->
+
+				<!-- *********** Begin: EC over reals: Associativity of Addition *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						椭圆曲线<span class = "title weight">结合律</span>
+					</div>
+
+					<!-- Graph -->
+					<img src="/images/ec_math/ec_add_associativity0.svg" class = "image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_add_associativity1.svg" class = "fragment image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_add_associativity2.svg" class = "fragment image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_add_associativity3.svg" class = "fragment image" style = "z-index: -1;">
+					<img src="/images/ec_math/ec_add_associativity4.svg" class = "fragment image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 24px 0 0 0;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 50%; font-size: 24px;">
+							<div style ="text-align: center;">
+								<br>
+								<span class ="weight">(P1 + P2) + P3 = P1 + (P2 + P3)</span>
+							</div>
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 50%; font-size: 24px; margin: 40px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线加法结合律的说明:</li>
+								<ul>
+									<li>加法的顺序不会改变结果.</li>
+									<li>结合律的证明<a class="orange_link" href="https://www.maths.tcd.ie/pub/Maths/Courseware/EllipticCurves/2016/Associativity.pdf" target="_blank">很复杂</a>.</li>
+									<li>回到分配律:</li>
+									<ul>
+										<li><span class="inline_code">(P+P+P)+P=(P+P)+(P+P)=((P+P)+P)+P</span></li>
+										<li><span class="inline_code">3&#8901;P + P = 2&#8901;P + 2&#8901;P = 4&#8901;P</span></li>
+										<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+									</ul>
+								</ul>
+
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** END: EC over reals: Associativity of Addition *********** -->
+
+				<!-- *********** BEGIN: Chapter Subtopics 3 *********** -->
+				<section class ="box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线数学</span>Subtopics
+					</div>
+
+					<!-- <img src="images/ec_math/chapter_subtopics_arrows.svg" class = "image" style = "z-index: -1;"> -->
+
+					<div class = "multi_text_box_container" style = "padding: 70px 0 0 0;">
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a + b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a - b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;c = a&#8901;c + b&#8901;c</span></li>
+								<li><span class="inline_code">a^b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a/b</span> 在 \(\mathbb{F}_{p}\)</li>
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC)在实数集 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">EC-Point P</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+
+							</ul>
+						</div>
+						<div class = "text_box orange_border" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC)在素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">椭圆曲线坐标 P</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{F}_{p}\) </li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+								<hr style = "height:3px; visibility:hidden;">
+								<li style = "font-weight: 600;">Bitcoin Keys:</li>
+								<li><span class="inline_code">s &#8901; G</span> 在 <span class="inline_code">secp256k1</span></li>
+							</ul>
+						</div>
+					</div>
+
+				</section>
+				<!-- *********** END: Chapter Subtopics 3 *********** -->
+
+				<!-- *********** Begin: EC over finite fields *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线</span> 在 \( \mathbb{F}_{p} \)
+					</div>
+
+					<!-- Graph -->
+					<img src="/images/ec_math/ec_ff_point.svg" class = "image" style = "z-index: -2;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 24px 0 0 0;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 50%; font-size: 24px;">
+							<div style ="text-align: center;">
+								<br>
+								<span>\( y^{2}=x^{3}+7\) 在 \( \mathbb{F}_{29} \)</span>
+							</div>
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 50%; font-size: 24px; margin: 40px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线的点在\( \mathbb{F}_{p} \)</li>
+								<ul>
+									<li>坐标满足下列方程:</li>
+									<li>\( y^{2}=ax^{3}+bx^{2}+c\:(mod\:P)\)</li>
+								</ul>
+								<hr style = "height:5px; visibility:hidden;">
+
+								<li style = "font-weight: 600;">椭圆曲线坐标例子:</li>
+								<ul>
+									<li>\( y^{2}=x^{3}+7\) 在 \( \mathbb{F}_{29} \)</li>
+									<li>\( P_{1}\left(3,18\right) \): </li>
+									<ul>
+										<li>\(18^{2} = 3^{3}+7\:(mod\:29) =5 \>\> \) &#10003</li>
+									</ul>
+									<li>\( P_{2}\left(23,20\right) \): </li>
+									<ul>
+										<li>\(20^{2} = 23^{3}+7\:(mod\:29) =23 \>\> \) &#10003</li>
+									</ul>
+									<li>注意: 椭圆曲线 图像是一组非连续的点, 因为有限域本身是非连续的.</li>
+								</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** END: EC over finite fields *********** -->
+
+				<!-- *********** BEGIN: EC Addition over Finite Fields *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						<span class = "title weight"> 椭圆曲线加法 </span>在 \( \mathbb{F}_{p} \)
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 60px 0 0 0;">
+
+						<!-- 30% div for formula and curve-->
+						<div class = "" style = "width: 30%; font-size: 18px;">
+							<div style ="text-align: left;">
+								<ul style = "margin: 25px 0 0 0; padding: 0px; list-style-type: none; opacity:0.4;">
+									<li style = "font-weight: 600;">椭圆曲线加法在 <br>实数范围 \(\mathbb{R}\):</li>
+									<br>
+									<li style = "font-size:20px;font-style:italic;">加法操作, 当 x1 != x2:</li>
+									<li>\( s = \frac{y_{2}-y_{1}}{x_{2}-x_{1}} \)</li>
+									<li>\( x_{3} = s^{2}-x_{1}-x_{2} \)</li>
+									<li>\( y_{3} = s\:(x_{1}-x_{3})-y_{1} \)</li>
+									<br>
+									<li style = "font-size:20px;font-style:italic;">加法操作, 当 P1 = P2:</li>
+									<li>\( s =\frac{(3x_{1}^{2}+a)}{2y_{1}} \)</li>
+									<li>\( x_{3} =s^{2}-2x_{1} \)<li>
+									<li>\( y_{3} =s(x_{1}-x_{3})-y_{1} \)<li>
+									<br>
+									<li style = "font-size:20px;font-style:italic;">无穷远点加法操作:</li>
+									<li>\( (x_{1},y_{1}) + (\infty , \infty) = (x_{1},-y_{1}) \)</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 70% div for formula and curve-->
+						<div class = "text_box" style = "width: 70%; font-size: 24px;">
+
+							<div class = "sub_multi_text_box_container">
+								<!-- Multi text container -->
+								<!-- Left -->
+								<div style = "width: 50%;">
+									<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+										<li style = "font-weight: 600;">椭圆曲线加法在素数域 \( \mathbb{F}_{p} \) :
+										</li>
+										<li style = "font-size:20px;"
+											>&#8592 椭圆曲线加法方程在实数范围 \( \mathbb{R} \)
+											同样适用于素数域 \( \mathbb{F}_{p} \).
+										</li>
+										<br>
+										<div style = "font-size:20px;">
+										<li>例子: </li><br>
+										<li>\(P_{3}\left(x_{3},y_{3}\right)=P_{1}\left(3,18\right)+P_{2}\left(23,20\right)\)
+										</li><br>
+										<li
+											>\(s = \frac{20-18}{23-3}  =2\cdot20^{29-2} \>(mod\:29) = 3\)
+										</li>
+										<li>\(x_{3} = 3^{2}-23-3\:(mod\:29) = 12\)</li>
+										<li>\(y_{3} = 3\cdot(3-12)-18\:(mod\:29)=13\)</li>
+									</div>
+									</ul>
+								</div>
+								<!-- Right  -->
+								<div style = "width: 45%;">
+									<br>
+									<span>\(y^{2}=x^{3}+7\) over \(\mathbb{F}_{29}\)
+									</span>
+									<br>
+									<br>
+									<img src="/images/ec_math/ec_ff_addition_cropped.svg" class = "image_cropped">
+								</div>
+							</div>
+
+						</div>	<!-- END: 70% div for formula and curve-->
+					</div><!-- END: multi-container div -->
+
+				</section>
+				<!-- *********** END: EC Addition over Finite Fields *********** -->
+
+
+				<!-- *********** BEGIN: EC-point Groups *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						椭圆曲线的<span class = "title weight">群</span>
+					</div>
+
+					<!-- Multi text Box -->
+					<div class = "multi_text_box_container" style = "padding: 60px 0 0 0;">
+						<!-- Left (w image) -->
+						<div class = "" style = "width: 35%; font-size: 25px; padding:40px 0 0 0;">
+							\( y^{2}=x^{3}+7\) 在 \( \mathbb{F}_{29} \)
+							<img src="/images/ec_math/ec_ff_group_cropped.svg" class = "image_cropped">
+						</div>
+						<!-- Right (UL)-->
+						<div class = "text_box" style = "width: 55%; font-size:22px">
+
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style ="font-weight: 600;">椭圆曲线的群 关于<span class ="inline_code">生成点 G</span> 和 <span class ="inline_code">群的阶n</span></li>
+								<ul>
+									<li>G</li>
+									<li>2G = G + G</li>
+									<li>3G = G + 2G = G + G + G</li>
+									<li>...</li>
+									<li>nG = (Inf/Inf)</li>
+								</ul>
+								<hr style = "height:3px; visibility:hidden;">
+
+								<li style ="font-weight: 600;"><span class ="inline_code">P = s&#8901;G</span>是离散对数问题</li>
+									<ul>
+										<li>没有从P计算s的有效方法.</li>
+										<li>s 可以用作秘钥.</li>
+										<li>P 对于 s 是唯一的.</li>
+										<li>椭圆曲线比RSA更高效.</li>
+										<li>Commitments/Pubkey 密码学.</li>
+									</ul>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<!-- *********** END: EC-point Groups *********** -->
+
+				<!-- *********** BEGIN: BTC Private/Public Keys *********** -->
+				<section class = "box">
+
+					<div class = "title">
+						比特币的 <span class = "title weight">私钥 & 公钥</span>
+					</div>
+
+					<div style = "position: absolute; top: 120px; left: 120px;">
+						<ul style = "list-style-type: none; margin: 0;">
+							<li class = "math_normal" style = "font-weight: 600; margin: 0 0 20px 0;">secp256k1 椭圆曲线的群:</li>
+							<li class = "math_normal">\(y^{2}=x^{3}+7\) 在 \(\mathbb{F}_{p}\) 当 \(p = 2^{256} - 2^{32} - 977\)</li>
+							<li class = "math_normal">\(G = \:(\) <span style = "font-family: Roboto Mono; font-size: 20px;">79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798,
+								<br>
+								\(\:\:\:\:\:\:\:\:\:\:\:\:\)
+								483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8</span>\(\:)\)</li>
+							<li class = "math_normal">\(n =\) <span style = "font-family: Roboto Mono; font-size: 20px;">FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141</span></li>
+							<div class = "substep">
+								<li class = "math_normal" style = "font-weight: 600; margin: 30px 0 20px 0;">比特币 私钥 & 公钥:</li>
+								<li class = "math_normal weight">\(P = s \cdot G\)</li>
+								<li class = "math_normal" style = "font-style:italic;">( \(s\) 选为私钥, \(P\) 是公钥)</li>
+							</div>
+					</div>
+
+					<div class = "text_box_horizontal" style = "position: absolute; top: 580px; left: 65px;">
+						<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+							<li>secp256k1 椭圆曲线群被用于生成比特币私钥/公钥.</li>
+						</ul>
+					</div>
+
+				</section>
+				<!-- *********** END: BTC Private/Public Keys *********** -->
+
+				<!-- *********** BEGIN: Public Key Serialisation *********** -->
+				<section class = "box">
+					<div class = "title">
+						Bitcoin Public Key Point <span class = "title weight">Serialisation</span>
+					</div>
+
+					<!-- Derivation Graphic -->
+					<img src="/images/ec_math/publickey_serialisation.svg" class = "image" style = "z-index: -1;">
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
+						<!-- 45% div for formula and curve-->
+						<div class = "" style = "width: 45%; font-size: 27px;">
+						</div>
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 36%; font-size: 20px; margin: 40px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: bold; font-size:22px">&#10122 未压缩公钥坐标</li>
+								<li>未压缩的公钥坐标直接表示为x和y坐标.</li>
+								<br>
+								<li style = "font-weight: bold; font-size:22px">&#10123 压缩公钥坐标</li>
+								<li>压缩公钥坐标意味着从x坐标得到y坐标.
+								<br><br>
+								压缩公钥以0x02/0x03开头意味着 偶数/奇数 坐标.
+								</li>
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section>
+				<!-- *********** END: Public Key Serialisation *********** -->
+
+				<!-- *********** BEGIN: Chapter Subtopics Summary *********** -->
+				<section class ="box">
+
+					<div class = "title">
+						<span class = "title weight">椭圆曲线数学</span>Subtopics
+					</div>
+
+					<!-- <img src="images/ec_math/chapter_subtopics_arrows.svg" class = "image" style = "z-index: -1;"> -->
+
+					<div class = "multi_text_box_container" style = "padding: 70px 0 0 0;">
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a + b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a - b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;c = a&#8901;c + b&#8901;c</span></li>
+								<li><span class="inline_code">a^b</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a/b</span> 在 \(\mathbb{F}_{p}\)</li>
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC) 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">椭圆曲线(EC) P</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{R}\)</li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+
+							</ul>
+						</div>
+						<div class = "text_box" style = "width: 320px; font-size: 23px;">
+							<ul style = "margin: 0px; padding: 0px; list-style-type: none;">
+								<li style = "font-weight: 600;">椭圆曲线(EC)在素数域 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">椭圆曲线(EC)P</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">A + B</span> 在 \(\mathbb{F}_{p}\)</li>
+								<li><span class="inline_code">a &#8901; B</span> 在 \(\mathbb{F}_{p}\) </li>
+								<li><span class="inline_code">(a+b)&#8901;C = a&#8901;C + b&#8901;C</span></li>
+								<hr style = "height:3px; visibility:hidden;">
+								<li style = "font-weight: 600;">Bitcoin Keys:</li>
+								<li><span class="inline_code">s &#8901; G</span> 在 <span class="inline_code">secp256k1</span></li>
+							</ul>
+						</div>
+					</div>
+
+				</section>
+				<!-- *********** END: Chapter Subtopics Summary *********** -->
+
+
+
+			</div><!-- END: Slides Div -->
+		</div><!-- END: Reveal Div -->
+
+		<script src="/lib/js/head.min.js"></script>
+		<script src="/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: '/plugin/markdown/marked.js' },
+					{ src: '/plugin/markdown/markdown.js' },
+					{ src: '/plugin/notes/notes.js', async: true },
+					{ src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/plugin/math/math.js', async: true }
+				],
+
+				math: {
+					mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+				},
+				previewLinks: true,
+
+				// Push each slide change to the browser history
+				history: true,
+
+				overview: false,
+				touch: false,
+
+				// The "normal" size of the presentation, aspect ratio will be preserved
+				// when the presentation is scaled to fit different resolutions. Can be
+				// specified using percentage units.
+				width: 1366,
+			  height: 768,
+				// Factor of the display size that should remain empty around the content
+				margin: 0.05,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 1.5
+			});
+			// Shows the slide number using default formatting
+			Reveal.configure({ slideNumber: true });
+		</script>
+	</body>
+</html>
